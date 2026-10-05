@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bdxjduova28d8"]
+
+[ext_resource type="Script" uid="uid://chg0evcp15ksk" path="res://scenes/player/player.gd" id="1_0owmy"]
+[ext_resource type="Texture2D" uid="uid://cwkkl08airpta" path="res://assets/foxy/fox_hat/foxy_hat_sprite_sheet.png" id="2_lvxji"]
+[ext_resource type="AnimationLibrary" uid="uid://bxn6hb7ky7gfi" path="res://scenes/player/player_anims.tres" id="3_p47bc"]
+[ext_resource type="Script" uid="uid://kx1fr4p8vy0f" path="res://scenes/player/states/run.gd" id="4_qek5x"]
+[ext_resource type="Script" uid="uid://bytwgpxy1wbb3" path="res://scenes/player/states/idle.gd" id="5_5gtgg"]
+[ext_resource type="Script" uid="uid://dpcr7kcoh7xdh" path="res://scenes/player/states/jump.gd" id="6_h17s1"]
+[ext_resource type="Script" uid="uid://cqn00yvsknulb" path="res://scenes/player/states/fall.gd" id="7_je7p5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ar5k"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1634789828]
+script = ExtResource("1_0owmy")
+metadata/_custom_type_script = "uid://clw03abs2j8ss"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1153616127]
+offset = Vector2(0, 22)
+pixel_size = 0.0625
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("2_lvxji")
+hframes = 4
+vframes = 15
+frame = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=183752016]
+libraries/ = ExtResource("3_p47bc")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1664004151]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 30, 30)
+fov = 30.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2134210074]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_3ar5k")
+
+[node name="States" type="Node" parent="." unique_id=1096697325]
+
+[node name="Run" type="Node" parent="States" unique_id=1813256327]
+script = ExtResource("4_qek5x")
+
+[node name="Idle" type="Node" parent="States" unique_id=1630412374]
+script = ExtResource("5_5gtgg")
+
+[node name="Jump" type="Node" parent="States" unique_id=889607221]
+script = ExtResource("6_h17s1")
+
+[node name="Fall" type="Node" parent="States" unique_id=915700196]
+script = ExtResource("7_je7p5")

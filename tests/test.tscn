@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://b6csn0luawvwl"]
+
+[ext_resource type="PackedScene" uid="uid://b2r6ihyqi3scx" path="res://assets/models/map/tree.glb" id="1_7517i"]
+[ext_resource type="PackedScene" uid="uid://d3q8nb5gn04wk" path="res://scenes/objects/palm_tree.tscn" id="1_eig8f"]
+[ext_resource type="PackedScene" uid="uid://bdxjduova28d8" path="res://scenes/player/player.tscn" id="1_yggfj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ar5k"]
+size = Vector3(24, 1, 24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kpfm0"]
+size = Vector3(24, 1, 24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kkfuu"]
+size = Vector3(4, 2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ffqf3"]
+size = Vector3(4, 2, 4)
+
+[node name="Stage" type="Node3D" unique_id=1853874496]
+
+[node name="World" type="Node3D" parent="." unique_id=2134115423]
+
+[node name="tree" parent="World" unique_id=242148584 instance=ExtResource("1_7517i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 4)
+
+[node name="PalmTree" parent="World" unique_id=477149570 instance=ExtResource("1_eig8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 0)
+
+[node name="Ground" type="MeshInstance3D" parent="World" unique_id=2088443133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_3ar5k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Ground" unique_id=1253633944]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Ground/StaticBody3D" unique_id=98192709]
+shape = SubResource("BoxShape3D_kpfm0")
+
+[node name="Platform" type="MeshInstance3D" parent="World" unique_id=873230692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -2)
+mesh = SubResource("BoxMesh_kkfuu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Platform" unique_id=1046224655]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Platform/StaticBody3D" unique_id=1324185124]
+shape = SubResource("BoxShape3D_ffqf3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=230804972]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+shadow_enabled = true
+
+[node name="BaseCharacter" parent="." unique_id=1634789828 instance=ExtResource("1_yggfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
